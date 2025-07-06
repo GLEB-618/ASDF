@@ -11,5 +11,14 @@ services:
       MINIO_ROOT_USER: admin
       MINIO_ROOT_PASSWORD: supersecret
     volumes:
-      - "//e/minio-data:/data"  # путь до твоей папки
+      - "//e/minio-data:/data"
     command: server /data --console-address ":9001"
+    
+  clamav:
+    image: clamav/clamav:latest
+    ports:
+      - "26.176.35.255:3310:3310"
+    restart: always
+
+volumes:
+  minio-data:
