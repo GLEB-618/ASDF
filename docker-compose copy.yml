@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - "26.176.35.255:9000:9000"
+      - "26.176.35.255:9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: supersecret
+    volumes:
+      - "//e/minio-data:/data"
+    command: server /data --console-address ":9001"
+    networks:
+      - internal
+    
+  clamav:
+    image: clamav/clamav:latest
+    ports:
+      - "26.176.35.255:3310:3310"
+    restart: always
+    networks:
+      - internal
+
+  cdn:
+    image: nginx:alpine
+    container_name: cdn
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./cdn/nginx.conf:/etc/nginx/nginx.conf:ro
+      - cdn_cache:/var/cache/nginx
+    depends_on:
+      - minio
+    networks:
+      - internal
+
+volumes:
+  cdn_cache:
+  minio-data:
+
+networks:
+  internal:
