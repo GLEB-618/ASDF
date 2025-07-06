@@ -1,6 +1,7 @@
 import os, tempfile, ffmpeg, uuid
 from minio import Minio
-from flask import current_app
+from flask import current_app, jsonify
+from datetime import timedelta
 
 def get_s3_client():
     client = Minio(
@@ -55,3 +56,8 @@ def upload_video(file_obj, filename):
 
         # Возвращаем имя сконвертированного файла
         return mp4_filename
+    
+def get_url_video(video_id):
+    s3 = get_s3_client()
+    presigned_url = s3.presigned_get_object("videos", video_id + ".mp4", expires=timedelta(hours=1))
+    return jsonify({"url": presigned_url})

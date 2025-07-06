@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify
 from app import app
 from .minio_client import upload_video
-import uuid, tempfile, pyclamd, os
+import pyclamd
 
 
 @app.route('/')
