@@ -1,24 +1,110 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" rel="stylesheet" href="{{url_for('static', filename = 'main.css')}}">
-    </head>
-    <body>
-        <div class="container">
-            <header class="d-flex justify-content-center py-3"> 
-                <ul class="nav nav-pills"> 
-                    <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дом</font></font>
-                        <img class="headeri" src="{{url_for('static', filename='img/header.png')}}", alt="law">
-                    </a>
-                    </li> <li class="nav-item"><a href="#" class="nav-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">О</font></font></a></li> </ul> </header>
-            
-        </div>
-        <script src="" async defer></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Главная страница GKVD</title>
+
+
+</head>
+<body>
+    <a href="http://127.0.0.1:5000">
+        <img src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube"
+        style="
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">
+        
+    </a>
+
+    <p><a href="http://127.0.0.1:5000/liking" class="button"
+        style="
+            width: 148px;
+            height: 18px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">Понравившиеся   
+    </a></p>
+
+    <p><a href="http://127.0.0.1:5000/settings" class="button"
+         style="
+            width: 98px;
+            height: 18px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">Настройки
+    </a></p>
+
+    <p><a href="http://127.0.0.1:5000/info" class="button"
+        style="
+            width: 78px;
+            height: 18px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">О сайте
+    </a></p>
+
+    <p><a href="http://127.0.0.1:5000/help" class="button"
+        style="
+            width: 78px;
+            height: 18px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">Помощь    
+    </a></p>
+
+    <p><a href="http://127.0.0.1:5000/complaints" class="button"
+        style="
+            width: 78px;
+            height: 18px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">Жалобы    
+    </a></p>
+
+    <p><a href="http://127.0.0.1:5000/channel" class="button"
+        style="
+            width: 54px;
+            height: 40px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: b;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            ">Ваши видео   
+    </a></p>
+</body>
 </html>
