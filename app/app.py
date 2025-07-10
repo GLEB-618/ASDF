@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    return render_template('index.html') # Не забудьте всю эту панель с разделами добавить на каждой странице; если останется время, сделайте поисковую строку для видео.
 
 @app.route("/liking")
 def liking():
@@ -12,7 +12,7 @@ def liking():
 
 @app.route("/settings")
 def setting():
-    return render_template('settings.html')
+    return render_template('settings.html') # Добавьте тёмную тему и английский язык (Я не думаю, что здесь может ещё что-то понадобиться).
 
 @app.route("/info")
 def info():
@@ -20,11 +20,11 @@ def info():
 
 @app.route("/help")
 def help():
-    return render_template('help.html')
+    return render_template('help.html') # Я напишу ответы на главные вопросы, потом оформите этот раздел и добавьте нужные ссылки.
 
 @app.route("/complaints")
 def complaints():
-    return render_template('complaints.html')
+    return render_template('complaints.html') # Это раздел для админов! Сделайте whitelist для админов и модераторов.
 
 @app.route("/channel")
 def channel():
