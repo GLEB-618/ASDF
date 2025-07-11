@@ -3,9 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Жалобы</title>
+    <style>
+        a.button:hover {
+            background-color: gray;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-color: #555;
+        }
+    </style>
+
+    <!-- Рамка для панели кнопок -->
+    <style>
+        aside {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+
+            width:180px;
+            height: 450px;
+            border: 3px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            display: block;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
-    <h1>Жалобы</h1>
+
+    <div class="aside">
+    <aside> <!-- Левая панель с кнопками -->
+        <a href="http://127.0.0.1:5000">  <!-- Логотип сайта и переход на главную страницу -->
+            <img class="logo" src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube"
+            style="
+                margin-left: 34px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">       
+        </a>
+            <!-- Переход во вкладу "Понравившиеся" -->
+        <p><a href="http://127.0.0.1:5000/liking" class="button"
+            style="
+                width: 166px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                ">Понравившиеся   
+        </a></p> 
+                <!-- Переход во вкладу "Настройки" -->
+        <p><a href="http://127.0.0.1:5000/settings" class="button"
+            style="
+                width: 114px;
+                height: 34px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Настройки
+        </a></p>
+                <!-- Переход во вкладку "О сайте" -->
+        <p><a href="http://127.0.0.1:5000/info" class="button"
+            style="
+                width: 92px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">О сайте
+        </a></p>
+                <!-- Переход во вкладку "Помощь" -->
+        <p><a href="http://127.0.0.1:5000/help" class="button"
+            style="
+                width: 92px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Помощь    
+        </a></p>
+            <!-- Переход во вкладку "Жалобы" -->
+        <p><a href="http://127.0.0.1:5000/complaints" class="button"
+            style="
+                width: 94px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Жалобы    
+        </a></p>
+            <!-- Переход во вкладку "Ваши видео" -->
+        <p><a href="http://127.0.0.1:5000/channel" class="button"
+            style="
+                width: 130px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Ваши видео   
+        </a></p>
+    </aside></div>
 </body>
 </html>
