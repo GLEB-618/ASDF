@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+from flask import  Flask, render_template, request, jsonify
 from app import app
 from .minio_client import upload_video
 import pyclamd
