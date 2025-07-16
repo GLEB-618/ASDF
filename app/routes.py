@@ -66,3 +66,11 @@ def upload():
 
     # Возвращаем ID видео
     return jsonify({'message': 'Upload successful'}), 200
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("register.html")

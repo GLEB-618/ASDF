@@ -21,6 +21,20 @@ class Videos(Base):
     dislikes: Mapped[int] = mapped_column(server_default=text("0"))
 
 
+class Users(Base):
+    __tablename__ = "users"
+
+    id: Mapped[intpk]
+    login: Mapped[stx] = mapped_column(primary_key=True)
+    password: Mapped[stx]
+
+
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id: Mapped[intpk]
+    login: Mapped[stx] = mapped_column(primary_key=True)
+    password: Mapped[stx]
 # class Admins(Base):
 #     __tablename__ = "admins"
 
