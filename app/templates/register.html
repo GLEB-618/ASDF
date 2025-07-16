@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-box {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+            width: 300px;
+        }
+        .register-box h2 {
+            margin: 0 0 20px;
+        }
+        .register-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        .register-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0037ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .register-box button:hover {
+            background-color: #0011ff;
+        }
+        .register-box a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-box">
+        <h2>РЕГИСТРАЦИЯ</h2>
+        <form>
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <a href="/login">Уже есть аккаунт? Вход</a>
+    </div>
+</body>
+</html>

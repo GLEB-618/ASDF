@@ -17,6 +17,20 @@ class Videos(Base):
     uid: Mapped[stx]
 
 
+class Users(Base):
+    __tablename__ = "users"
+
+    id: Mapped[intpk]
+    login: Mapped[stx] = mapped_column(primary_key=True)
+    password: Mapped[stx]
+
+
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id: Mapped[intpk]
+    login: Mapped[stx] = mapped_column(primary_key=True)
+    password: Mapped[stx]
 # class Admins(Base):
 #     __tablename__ = "admins"
 
