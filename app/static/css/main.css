@@ -2,7 +2,11 @@ body {
     background-color: rgb(248, 247, 245);
     color: black;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;    
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 
 a {
@@ -37,8 +41,8 @@ a {
     padding: 3px;
     justify-content: space-between;
     align-items: center;
-    left: 1200px;
-    margin-top: 20px;
+    left: 950px;
+    bottom: 950px;
     overflow: hidden;
     
 }
@@ -54,4 +58,74 @@ a {
     box-sizing: border-box;
     background-color: rgb(248, 247, 245);
     border: none;
+}
+
+.content {
+    margin-left: 250px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    margin-left: 34px;
+    border: 3px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    display: block;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.logo:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+aside {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    width:180px;
+    height: 450px;
+    border: 3px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    display: block;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+a.button:hover {
+    background-color: gray;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.upload-img {
+    cursor: pointer;
+    display: flex;
+    width:60px;
+    height: 40px;
+    
+}
+
+.upload-btn {
+    cursor: pointer;
+    display: flex;
+    border: 3px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }

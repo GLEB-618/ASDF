@@ -5,50 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Жалобы</title>
-    <style>
-        a.button:hover {
-            background-color: gray;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border-color: #555;
-        }
-    </style>
-
-    <!-- Рамка для панели кнопок -->
-    <style>
-        aside {
-            position: fixed;
-            left: 10px;
-            top: 10px;
-
-            width:180px;
-            height: 450px;
-            border: 3px solid black;
-            border-radius: 15px;
-            padding: 5px;
-            display: block;
-            box-sizing: border-box;
-            background-color: white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
-    </style>
 </head>
 <body>
+
+    <div class="search-form">
+        <input class="search-form__txt" type="text" placeholder="Введите запрос">
+        <button class="search-form__btn">
+            <img class="search-form__img" src="static/img/lupa.png" alt="Поиск">
+        </button>
+    </div>
+
+    <div class="content"></div>
 
     <div class="aside">
     <aside> <!-- Левая панель с кнопками -->
         <a href="http://127.0.0.1:5000">  <!-- Логотип сайта и переход на главную страницу -->
-            <img class="logo" src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube"
-            style="
-                margin-left: 34px;
-                border: 3px solid black;
-                border-radius: 15px;
-                padding: 5px;
-                display: block;
-                box-sizing: border-box;
-                background-color: white;
-                box-shadow: 0 0 5px rgba(0,0,0,0.2);
-                ">       
+            <img class="logo" src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube">       
         </a>
             <!-- Переход во вкладу "Понравившиеся" -->
         <p><a href="http://127.0.0.1:5000/liking" class="button"

@@ -5,9 +5,107 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="video" />
-        <button type="submit">Загрузить</button>
-    </form>
+
+    <div class="content">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="video" />
+            <button type="submit">Загрузить</button>
+        </form>
+    </div>
+
+
+    
+    <div class="aside">   
+    <aside>
+        <a href="http://127.0.0.1:5000">
+            <img class="logo" src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube">
+        </a>
+
+        <p><a href="http://127.0.0.1:5000/liking" class="button"
+            style="
+                width: 166px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                ">Понравившиеся   
+        </a></p> 
+
+        <p><a href="http://127.0.0.1:5000/settings" class="button"
+            style="
+                width: 114px;
+                height: 34px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Настройки
+        </a></p>
+
+        <p><a href="http://127.0.0.1:5000/info" class="button"
+            style="
+                width: 92px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">О сайте
+        </a></p>
+
+        <p><a href="http://127.0.0.1:5000/help" class="button"
+            style="
+                width: 92px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Помощь    
+        </a></p>
+
+        <p><a href="http://127.0.0.1:5000/complaints" class="button"
+            style="
+                width: 94px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Жалобы    
+        </a></p>
+
+        <p><a href="http://127.0.0.1:5000/channel" class="button"
+            style="
+                width: 130px;
+                height: 36px;
+                border: 3px solid black;
+                border-radius: 15px;
+                padding: 5px;
+                display: block;
+                box-sizing: border-box;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+                ">Ваши видео   
+        </a></p>
+    </aside></div>
 </body>
 </html>
