@@ -1,4 +1,4 @@
-import os, tempfile, ffmpeg, uuid
+import os, tempfile, ffmpeg
 from minio import Minio
 from flask import current_app, jsonify
 from datetime import timedelta
@@ -12,16 +12,13 @@ def get_s3_client():
     )
     return client
 
-def upload_video(file_obj, filename):
+def upload_video(file_obj, filename, uid):
     s3 = get_s3_client()
 
     # Сохраняем оригинал во временный файл
     with tempfile.TemporaryDirectory() as temp_dir:
         input_path = os.path.join(temp_dir, filename)
         file_obj.save(input_path)
-
-        # Генерим уникальный ID
-        uid = uuid.uuid4().hex
 
         # Путь для mp4-файла
         mp4_filename = f"{uid}.mp4"

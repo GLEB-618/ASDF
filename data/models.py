@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import ARRAY, TEXT
 from data.database import Base
 
 intpk = Annotated[int, mapped_column(primary_key=True)]
-usid = Annotated[int, mapped_column(BigInteger, unique=True)]
+# usid = Annotated[int, mapped_column(BigInteger, unique=True)]
 stx = Annotated[str, mapped_column(Text)]
 
 
@@ -15,6 +15,10 @@ class Videos(Base):
 
     id: Mapped[intpk]
     uid: Mapped[stx]
+    title: Mapped[stx]
+    description: Mapped[stx]
+    likes: Mapped[int] = mapped_column(server_default=text("0"))
+    dislikes: Mapped[int] = mapped_column(server_default=text("0"))
 
 
 # class Admins(Base):

@@ -8,7 +8,15 @@
 
     <div class="content">
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="video" />
+            <label for="title">Название видео:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="description">Описание:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" placeholder="Введите описание..."></textarea><br><br>
+
+            <label for="video">Файл видео:</label><br>
+            <input type="file" id="video" name="video" accept="video/*" required><br><br>
+
             <button type="submit">Загрузить</button>
         </form>
     </div>
@@ -17,11 +25,11 @@
     
     <div class="aside">   
     <aside>
-        <a href="http://127.0.0.1:5000">
+        <a href="/">
             <img class="logo" src="/static/img/gkvd.png" width="90" height="90" alt="Главная страница GDVDube">
         </a>
 
-        <p><a href="http://127.0.0.1:5000/liking" class="button"
+        <p><a href="/liking" class="button"
             style="
                 width: 166px;
                 height: 36px;
@@ -37,7 +45,7 @@
                 ">Понравившиеся   
         </a></p> 
 
-        <p><a href="http://127.0.0.1:5000/settings" class="button"
+        <p><a href="/settings" class="button"
             style="
                 width: 114px;
                 height: 34px;
@@ -51,7 +59,7 @@
                 ">Настройки
         </a></p>
 
-        <p><a href="http://127.0.0.1:5000/info" class="button"
+        <p><a href="/info" class="button"
             style="
                 width: 92px;
                 height: 36px;
@@ -65,7 +73,7 @@
                 ">О сайте
         </a></p>
 
-        <p><a href="http://127.0.0.1:5000/help" class="button"
+        <p><a href="/help" class="button"
             style="
                 width: 92px;
                 height: 36px;
@@ -79,7 +87,7 @@
                 ">Помощь    
         </a></p>
 
-        <p><a href="http://127.0.0.1:5000/complaints" class="button"
+        <p><a href="/complaints" class="button"
             style="
                 width: 94px;
                 height: 36px;
@@ -93,7 +101,7 @@
                 ">Жалобы    
         </a></p>
 
-        <p><a href="http://127.0.0.1:5000/channel" class="button"
+        <p><a href="/channel" class="button"
             style="
                 width: 130px;
                 height: 36px;

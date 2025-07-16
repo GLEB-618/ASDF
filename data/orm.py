@@ -1,4 +1,5 @@
 from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
 
@@ -14,21 +15,17 @@ class SyncORM:
                 Base.metadata.create_all(bind=conn)
         except Exception as e:
             print(e)
-    # @staticmethod
-    # async def insert_user_id_table(table, user_id: int) -> None:
-    #     try:
-    #         async with async_session_factory() as session:
-    #             stmt = insert(table).values(user_id=user_id).on_conflict_do_nothing()
-    #             result = await session.execute(stmt)
-    #             await session.commit()
 
-    #             if result.rowcount > 0:
-    #                 log.info(f"Пользователь {user_id} добавлен в таблицу {table.__tablename__}")
-    #             # else:
-    #             #     log.debug(f"Пользователь {user_id} уже существует в таблице {table.__tablename__}")
+    @staticmethod
+    def insert_meta_video(uid: str, title: str, description: str):
+        try:
+            with sync_session_factory() as session:
+                stmt = insert(Videos).values(uid=uid, title=title, description=description).on_conflict_do_nothing()
+                session.execute(stmt)
+                session.commit()
 
-    #     except Exception as e:
-    #         log.error(f"Ошибка при добавлении пользователя {user_id}: {e}")
+        except Exception as e:
+            print(e)
 
     # @staticmethod
     # async def select_state(user_id: int) -> str:
