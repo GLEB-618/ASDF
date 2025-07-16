@@ -1,7 +1,8 @@
 from flask import  Flask, render_template, request, jsonify
 from app import app
 from .minio_client import upload_video
-import pyclamd
+import pyclamd, uuid
+from data.orm import SyncORM
 
 
 @app.route("/")
@@ -39,12 +40,14 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload():
     # Получаем файл из формы (multipart/form-data)
+    title = request.form.get('title')
+    description = request.form.get('description')
     file = request.files.get('video')
     if not file:
         return jsonify({'error': 'No video uploaded'}), 400
 
     # Подключение к clamd
-    cd = pyclamd.ClamdNetworkSocket(host='26.176.35.255', port=3310)
+    cd = pyclamd.ClamdNetworkSocket(host='26.48.28.173', port=3310)
 
     if not cd.ping():
         return jsonify({'error': 'ClamAV daemon is not available'}), 500
@@ -56,7 +59,10 @@ def upload():
         return jsonify({'error': 'File is infected', 'details': result}), 400
 
     file.seek(0)
-    upload_video(file, file.filename)
+    # Генерим уникальный ID
+    uid = uuid.uuid4().hex
+    upload_video(file, file.filename, uid)
+    SyncORM.insert_meta_video(uid, title, description) # type: ignore
 
     # Возвращаем ID видео
     return jsonify({'message': 'Upload successful'}), 200
