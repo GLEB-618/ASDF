@@ -26,10 +26,18 @@
 
 </head>
 <body>
-    <a href="http://127.0.0.1:5000/login" class="login-btn">Войти</a>
+    <a href="/login" class="login-btn">Войти</a>
 
 
     <div class="content">
+        {% for video in videos %}
+            <div>
+                <a href="{{ url_for('view_video', uid=video.uid) }}">
+                    <img src="{{ video.thumb_url }}" alt="thumbnail" width="320">
+                    <h3>{{ video.title }}</h3>
+                </a>
+            </div>
+        {% endfor %}
 
         <div class="search-form">
         <input class="search-form__txt" type="text" placeholder="Введите запрос">

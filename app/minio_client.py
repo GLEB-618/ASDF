@@ -22,21 +22,28 @@ def upload_video(file_obj, filename, uid):
 
         # Путь для mp4-файла
         mp4_filename = f"{uid}.mp4"
-        output_path = os.path.join(temp_dir, mp4_filename)
+        output_path_mp4 = os.path.join(temp_dir, mp4_filename)
+
+        # Путь для jpeg-файла
+        jpeg_filename = f"{uid}.jpeg"
+        output_path_jpeg = os.path.join(temp_dir, jpeg_filename)
 
         # Конвертация через ffmpeg
         try:
             (
                 ffmpeg
                 .input(input_path)
-                .output(output_path,
+                .output(output_path_mp4,
                         vcodec='libx264',
-                        acodec='aac',
-                        # preset='slow',
-                        # crf=20,
-                        # movflags='faststart',
-                        # max_muxing_queue_size=1024
+                        acodec='aac'
                         )
+                .overwrite_output()
+                .run(capture_stdout=True, capture_stderr=True)
+            )
+            (
+                ffmpeg
+                .input(input_path, ss='00:00:03')
+                .output(output_path_jpeg, vframes=1)
                 .overwrite_output()
                 .run(capture_stdout=True, capture_stderr=True)
             )
@@ -45,16 +52,32 @@ def upload_video(file_obj, filename, uid):
 
         # Загрузка в MinIO
         s3.fput_object(
-            bucket_name=current_app.config['AWS_BUCKET_NAME'],
+            bucket_name=current_app.config['AWS_BUCKET_NAME_VIDEOS'],
             object_name=mp4_filename,
-            file_path=output_path,
+            file_path=output_path_mp4,
             content_type='video/mp4'
         )
-
-        # Возвращаем имя сконвертированного файла
-        return mp4_filename
+        s3.fput_object(
+            bucket_name=current_app.config['AWS_BUCKET_NAME_THUMBNAILS'],
+            object_name=jpeg_filename,
+            file_path=output_path_jpeg,
+            content_type="image/jpeg"
+        )
     
-def get_url_video(video_id):
+def get_url_video(uid):
     s3 = get_s3_client()
-    presigned_url = s3.presigned_get_object("videos", video_id + ".mp4", expires=timedelta(hours=1))
-    return jsonify({"url": presigned_url})
+    presigned_url = s3.presigned_get_object(
+        bucket_name="videos", 
+        object_name=f"{uid}.mp4", 
+        expires=timedelta(hours=1)
+        )
+    return presigned_url
+
+def get_url_thumb(uid):
+    s3 = get_s3_client()
+    presigned_url = s3.presigned_get_object(
+        bucket_name="thumbnails", 
+        object_name=f"{uid}.jpeg", 
+        expires=timedelta(hours=1)
+        )
+    return presigned_url

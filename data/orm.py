@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
@@ -11,8 +11,8 @@ class SyncORM:
         try:
             with sync_engine.begin() as conn:
                 Base.metadata.drop_all(bind=conn)
-
                 Base.metadata.create_all(bind=conn)
+
         except Exception as e:
             print(e)
 
@@ -26,6 +26,27 @@ class SyncORM:
 
         except Exception as e:
             print(e)
+
+    @staticmethod
+    def get_all_video_uids():
+        try:
+            with sync_session_factory() as session:
+                stmt = select(Videos.title, Videos.uid).order_by(func.random())
+                result = session.execute(stmt).all()  # список кортежей: [('title1', 'uid1'), ...]
+                return [{'title': title, 'uid': uid} for title, uid in result]
+            
+        except Exception as e:
+            print(e)
+            return []
+    
+    @staticmethod
+    def get_video_meta(uid: str):
+        with sync_session_factory() as session:
+            query = select(Videos.title, Videos.description).where(Videos.uid == uid)
+            result = session.execute(query).mappings().one_or_none()
+            if result:
+                return result
+            return None
 
     # @staticmethod
     # async def select_state(user_id: int) -> str:

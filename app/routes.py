@@ -1,13 +1,27 @@
 from flask import  Flask, render_template, request, jsonify
 from app import app
-from .minio_client import upload_video
+from .minio_client import upload_video, get_url_video, get_url_thumb
 import pyclamd, uuid
 from data.orm import SyncORM
 
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    videos = SyncORM.get_all_video_uids()
+    links = []
+    for video in videos:
+        thumb_url = get_url_thumb(video['uid'])
+        links.append({
+            "title": video["title"], 
+            "thumb_url": thumb_url,
+            "uid": video['uid']})
+    return render_template('index.html', videos=links)
+
+@app.route('/<string:uid>')
+def view_video(uid):
+    video = SyncORM.get_video_meta(uid)
+    url = get_url_video(uid)
+    return render_template('video_page.html', video=video, video_url=url)
 
 @app.route("/liking")
 def liking():

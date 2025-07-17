@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ video.title }}</title>
+</head>
+<body>
+
+    <h1>{{ video.title }}</h1>
+    <p>{{ video.description }}</p>
+
+    <video width="720" controls>
+        <source src="{{ video_url }}" type="video/mp4">
+        Ваш браузер не поддерживает тег <code>video</code>.
+    </video>
+
+    <br><br>
+    <a href="{{ url_for('main') }}">← Назад к списку видео</a>
+
+</body>
+</html>

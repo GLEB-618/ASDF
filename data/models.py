@@ -35,6 +35,8 @@ class Admin(Base):
     id: Mapped[intpk]
     login: Mapped[stx] = mapped_column(primary_key=True)
     password: Mapped[stx]
+
+    
 # class Admins(Base):
 #     __tablename__ = "admins"
 
