@@ -1,6 +1,6 @@
 from typing import Annotated
 from sqlalchemy import BigInteger, Text, Boolean, text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, sessionmaker
 from sqlalchemy.dialects.postgresql import ARRAY, TEXT
 
 from data.database import Base

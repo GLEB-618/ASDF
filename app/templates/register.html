@@ -51,11 +51,10 @@
 <body>
     <div class="register-box">
         <h2>РЕГИСТРАЦИЯ</h2>
-        <form>
-            <input type="text" placeholder="Username" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <input type="password" placeholder="Confirm Password" required>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Username" name="login" required><br><br>
+            <input type="password" placeholder="Password" name = "password" required>
+            <input type="password" placeholder="Confirm password" name="password2" required><br><br>
             <button type="submit">Зарегистрироваться</button>
         </form>
         <a href="/login">Уже есть аккаунт? Вход</a>

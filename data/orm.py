@@ -3,7 +3,6 @@ from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
 
-
 class SyncORM:
 
     @staticmethod
@@ -27,6 +26,16 @@ class SyncORM:
         except Exception as e:
             print(e)
 
+    @staticmethod
+    def insert_data_user(login: str, password: str):
+        try:
+            with sync_session_factory() as session:
+                stmt = insert(Users).values(login=login, password=password).on_conflict_do_nothing()
+                session.execute(stmt)
+                session.commit()
+
+        except Exception as e:
+            print(e)
     # @staticmethod
     # async def select_state(user_id: int) -> str:
     #     try:
