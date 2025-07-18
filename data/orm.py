@@ -3,7 +3,6 @@ from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
 
-
 class SyncORM:
 
     @staticmethod
