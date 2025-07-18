@@ -26,7 +26,7 @@
 
         <form action="{{ url_for('vote', uid=video.uid) }}" method="post" style="display:inline">
             <input type="hidden" name="video_uid" value="{{ video.uid }}">
-            <input type="hidden" name="vote_type" value="dislike">
+            <input type="hidden" name="vote_type" value="dislikes">
             <input type="hidden" name="increase" value="true">
             <button type="submit">👎 Дизлайк ({{ video.dislikes }})</button>
         </form>
