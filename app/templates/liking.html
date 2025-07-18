@@ -6,27 +6,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Понравившиеся видео</title>
 
-    <style>
-        .login-btn {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #1e00ff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .login-btn:hover {
-            background-color: #0015ff;
-        }
-    </style>
 
 </head>
 <body>
     <a href="http://127.0.0.1:5000/login" class="login-btn">Войти</a>
+    
     <div class="search-form">
         <input class="search-form__txt" type="text" placeholder="Введите запрос">
         <button class="search-form__btn">
