@@ -1,4 +1,4 @@
-from sqlalchemy import select, func
+from sqlalchemy import select, func, update
 from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
@@ -41,12 +41,39 @@ class SyncORM:
     
     @staticmethod
     def get_video_meta(uid: str):
-        with sync_session_factory() as session:
-            query = select(Videos.title, Videos.description).where(Videos.uid == uid)
-            result = session.execute(query).mappings().one_or_none()
-            if result:
-                return result
+        try:
+            with sync_session_factory() as session:
+                query = select(Videos.title, Videos.description, Videos.likes, Videos.dislikes, Videos.uid).where(Videos.uid == uid)
+                result = session.execute(query).mappings().one_or_none()
+                if result:
+                    return result
+                return None
+            
+        except Exception as e:
+            print(e)
             return None
+        
+    @staticmethod
+    def vote(uid: str, vote_type: str, increase: bool):
+        try:
+            with sync_session_factory() as session:
+                stmt = update(Videos).where(Videos.uid == uid)
+                
+                field = {
+                    'like': Videos.likes,
+                    'dislikes': Videos.dislikes
+                }.get(vote_type)
+
+                if field is not None:
+                    stmt = update(Videos).where(Videos.uid == uid).values({
+                        field.key: field + (1 if increase else -1)
+                    })
+                
+                session.execute(stmt)
+                session.commit()
+
+        except Exception as e:
+            print(e)
 
     # @staticmethod
     # async def select_state(user_id: int) -> str:

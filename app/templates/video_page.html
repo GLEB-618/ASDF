@@ -14,6 +14,20 @@
         Ваш браузер не поддерживает тег <code>video</code>.
     </video>
 
+    <form action="{{ url_for('vote', uid=video.uid) }}" method="post" style="display:inline">
+        <input type="hidden" name="video_uid" value="{{ video.uid }}">
+        <input type="hidden" name="vote_type" value="like">
+        <input type="hidden" name="increase" value="true">
+        <button type="submit">👍 Лайк ({{ video.likes }})</button>
+    </form>
+
+    <form action="{{ url_for('vote', uid=video.uid) }}" method="post" style="display:inline">
+        <input type="hidden" name="video_uid" value="{{ video.uid }}">
+        <input type="hidden" name="vote_type" value="dislike">
+        <input type="hidden" name="increase" value="true">
+        <button type="submit">👎 Дизлайк ({{ video.dislikes }})</button>
+    </form>
+
     <br><br>
     <a href="{{ url_for('main') }}">← Назад к списку видео</a>
 

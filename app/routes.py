@@ -1,4 +1,4 @@
-from flask import  Flask, render_template, request, jsonify
+from flask import  Flask, render_template, request, jsonify, redirect, url_for
 from app import app
 from .minio_client import upload_video, get_url_video, get_url_thumb
 import pyclamd, uuid
@@ -22,6 +22,16 @@ def view_video(uid):
     video = SyncORM.get_video_meta(uid)
     url = get_url_video(uid)
     return render_template('video_page.html', video=video, video_url=url)
+
+@app.route('/<string:uid>/vote', methods=['POST'])
+def vote(uid):
+    video_uid = request.form['video_uid']
+    vote_type = request.form['vote_type']
+    increase = request.form['increase'] == 'true'
+
+    SyncORM.vote(video_uid, vote_type, increase)
+
+    return redirect(url_for('view_video', uid=uid))
 
 @app.route("/liking")
 def liking():
