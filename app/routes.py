@@ -4,13 +4,7 @@ from .minio_client import upload_video, get_url_video, get_url_thumb
 import pyclamd, uuid
 from data.orm import SyncORM
 import bcrypt
-from data.database import Session
-from data.models import Users
 
-def check_user_exists(login: str) -> bool:
-    with Session() as session:
-        user = session.query(Users).filter(Users.login == login).first()
-        return user is not None
 
 def hash_password(password):
     salt = bcrypt.gensalt(rounds=10)
@@ -18,6 +12,7 @@ def hash_password(password):
     return hashed.decode('utf-8')
 
 def verify_password(plain_password, hashed_password):
+    print(plain_password, hashed_password)
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
@@ -79,8 +74,6 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    if request.method == 'GET':
-        return render_template('upload.html')
     if request.method == 'POST':
         try:
             # Получаем файл из формы (multipart/form-data)
@@ -113,57 +106,61 @@ def upload():
         except Exception as e:
             print('Ошибка регистрации:{e}')
             return jsonify({'message': 'Ошибка сервера'}), 500
+    else:
+        return render_template('upload.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'GET':
-        return render_template("login.html")
     if request.method == 'POST':
         try:
-            login = request.form('login')
-            password = request.form('password')
+            login = request.form.get('login')
+            password = request.form.get('password')
+
+            if not login:
+                return "Логин обязателен"
             
             #Проверка на существование пользователя
-            with Session as session:
-                user = session.query(Users).filter(Users.login == login).first()
-                if not user:
-                    return jsonify({'message': 'Пользователь не найден'})
-                if not verify_password(password, user.password):
-                    return jsonify({'message': 'Неверный пароль'}), 401
+            user_password = SyncORM.get_user_password(login)
+            if not user_password:
+                return jsonify({'message': 'User not found'})
+            if not verify_password(password, user_password):
+                return jsonify({'message': 'Invalid password'}), 401
 
-                return jsonify({'message': 'Вход успешен'}), 200
+            return jsonify({'message': 'Upload successful'}), 200
 
         except Exception as e:
             print(f"Ошибка авторизации: {e}")
-            return jsonify({'message': 'Ошибка сервера'}), 500
+            return jsonify({'message': 'Server error'}), 500
+    else:
+        return render_template("login.html")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    
     if request.method == 'POST':
         try:
             login = request.form.get('login')
             password = request.form.get('password')
             password2 = request.form.get('password2')
 
+            if not login:
+                return "Логин обязателен"
+
             #Проверка совпадения паролей
             if password != password2:
                 return "Пароли не совпадают"
             
             #Проверка наличия пользователя
-            if check_user_exists(login):
+            if SyncORM.get_user_password(login):
                 return 'Этот пользователь уже существует'
             
             #Хэширование пароля
             hashed_password = hash_password(password)
 
             #Записывание пользователя в БД
-            with Session as session:
-                new_user = Users(login = login, password = hashed_password)
-                session.add(new_user)
-                session.commit()
+            SyncORM.add_user(login, hashed_password)
+
             return render_template('index.html')
         except Exception as e:
             return jsonify({'message': 'Ошибка сервера'}), 500
+    else:
+        return render_template('register.html')

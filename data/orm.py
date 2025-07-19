@@ -1,4 +1,4 @@
-from sqlalchemy import select, func, update
+from sqlalchemy import select, func, update, exists
 from sqlalchemy.dialects.postgresql import insert
 from data.database import sync_engine, sync_session_factory, Base
 from data.models import *
@@ -68,6 +68,28 @@ class SyncORM:
                         field.key: field + (1 if increase else -1)
                     })
                 
+                session.execute(stmt)
+                session.commit()
+
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def get_user_password(login: str):
+        try:
+            with sync_session_factory() as session:
+                query = select(Users.password).where(Users.login == login)
+                result = session.execute(query).scalar_one_or_none()
+                return result
+            
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def add_user(login: str, password: str):
+        try:
+            with sync_session_factory() as session:
+                stmt = insert(Users).values(login=login, password=password).on_conflict_do_nothing()
                 session.execute(stmt)
                 session.commit()
 

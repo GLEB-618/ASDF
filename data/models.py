@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import ARRAY, TEXT
 
 from data.database import Base
 
-intpk = Annotated[int, mapped_column(primary_key=True)]
+intpk = Annotated[int, mapped_column(primary_key=True, autoincrement=True)]
 # usid = Annotated[int, mapped_column(BigInteger, unique=True)]
 stx = Annotated[str, mapped_column(Text)]
 
